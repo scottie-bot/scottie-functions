@@ -301,7 +301,8 @@ function getSchedule(day) {
 
 function getCurrentPeriod(schedule) {
 
-    var today = new Date();
+    var today = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
+    today = new Date(today);
 
     var current_time = pad(today.getHours()) + ":" + pad(today.getMinutes());
 
@@ -650,6 +651,20 @@ function calendar_events(agent) {
 
 }
 
+function what_period(agent) {
+
+    var date = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
+    date = new Date(date);
+
+    var todaysSchedule = getSchedule(date);
+
+    var current_period = getCurrentPeriod(todaysSchedule);
+
+    agent.add("It is currently " + prettier_events(current_period));
+
+}
+
+
 function schedule_info(agent) {
 
     var item = agent.parameters.schedule_item;
@@ -661,16 +676,19 @@ function schedule_info(agent) {
     var append = "";
 
     if (day == null || day == "") {
+        
+        var date = new Date().toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
+        date = new Date(date);
 
-        var date = new Date();
-
-        date.setHours(date.getHours() - 8);
+        console.log("No date specified... Today is : " + date);
 
     } else {
 
-        day = day.replace("-08:00", "");
+        var date = new Date(day).toLocaleString("en-US", {timeZone: "America/Los_Angeles"});
+        date = new Date(date);
 
-        var date = new Date(day);
+        console.log("Date specified as: " + date);
+
 
         append = "On " + days[date.getDay()] + "s, ";
 
@@ -682,9 +700,13 @@ function schedule_info(agent) {
 
         var that_period = getCurrentPeriod(that_days_schedule);
 
+        console.log("No period specified... The period according to the schedule is " + that_period);
+
     } else {
 
         var that_period = item;
+        
+        console.log("Period specified as " + that_period);
 
     }
 
@@ -738,6 +760,8 @@ function schedule_info(agent) {
   intentMap.set('Bell Schedule', schedule_info);
   intentMap.set('Teacher Location', teacher_location);
   intentMap.set('Calendar Events', calendar_events);
+  intentMap.set('What Period', what_period);
+
   // intentMap.set('your intent name here', yourFunctionHandler);
   // intentMap.set('your intent name here', googleAssistantHandler);
   agent.handleRequest(intentMap);
