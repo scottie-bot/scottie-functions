@@ -1,4 +1,4 @@
-# vaha-server
+# vaha
 DialogFlow Functions (hosted on Firebase) for the vaha-client.
 
 ## Setup
