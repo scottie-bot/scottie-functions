@@ -1,4 +1,4 @@
-# vaha
+# scottie-functions
 DialogFlow Functions (hosted on Firebase) for the vaha-client.
 
 ## Setup
