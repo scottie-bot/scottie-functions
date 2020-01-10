@@ -1,0 +1,18 @@
+- pipeline: "Deploy to Firebase & DialogFlow"
+  trigger_mode: "ON_EVERY_PUSH"
+  ref_name: "master"
+  ref_type: "BRANCH"
+  trigger_condition: "ALWAYS"
+  actions:
+    - action: "Execute: firebase deploy --non-interactive"
+      type: "FIREBASE"
+      working_directory: "/buddy/scottie-functions"
+      version: "12"
+      application_id: "helixvaha"
+      execute_commands:
+        - "cd functions && npm install && cd ../"
+        - "firebase deploy --non-interactive"
+      mount_filesystem_path: "/buddy/scottie-functions"
+      build_tool_version: "7.11.0"
+      trigger_condition: "ALWAYS"
+      integration_hash: "5e17f5a2aab2cb24ac96e0f1"
