@@ -1,10 +1,15 @@
 // See https://github.com/dialogflow/dialogflow-fulfillment-nodejs
-// for Dialogflow fulfillment library docs, samples, and to report issues
+// for Dialogflow fulfillment library docs, samples, and to report issues.
 'use strict';
 
 const functions = require('firebase-functions');
-const { WebhookClient } = require('dialogflow-fulfillment');
-const { Card, Suggestion } = require('dialogflow-fulfillment');
+const {
+    WebhookClient
+} = require('dialogflow-fulfillment');
+const {
+    Card,
+    Suggestion
+} = require('dialogflow-fulfillment');
 const argv = require('yargs').argv;
 const api_request = require('request-promise-native');
 var stringSimilarity = require('string-similarity');
@@ -18,7 +23,10 @@ exports.rtdb_tests = functions.https.onRequest(rtdbModule.handler);
 
 exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, response) => {
 
-    const agent = new WebhookClient({ request, response });
+    const agent = new WebhookClient({
+        request,
+        response
+    });
     console.log('Dialogflow Request headers: ' + JSON.stringify(request.headers));
     console.log('Dialogflow Request body: ' + JSON.stringify(request.body));
 
@@ -239,7 +247,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
         if (displayAMorPM)
             return split[0] + ":" + split[1] + " " + AMorPM;
-        else (!displayAMorPM)
+        else(!displayAMorPM)
         return split[0] + ":" + split[1];
 
     }
@@ -250,58 +258,152 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
         if ([1, 4, 5].indexOf(day.getDay()) > -1) { //Monday, Thursday, Friday
 
-            tutorial = { error: "none" };
-            period1 = { start: "7:50", end: "9:22" };
-            period2 = { start: "9:30", end: "11:02" };
-            nutrition_break = { start: "11:02", end: "11:15" };
-            advisory = { error: "none" };
-            period3 = { start: "11:15", end: "12:48" };
-            lunch = { start: "12:48", end: "13:18" }
-            period4 = { start: "13:23", end: "14:55" };
+            tutorial = {
+                error: "none"
+            };
+            period1 = {
+                start: "7:50",
+                end: "9:22"
+            };
+            period2 = {
+                start: "9:30",
+                end: "11:02"
+            };
+            nutrition_break = {
+                start: "11:02",
+                end: "11:15"
+            };
+            advisory = {
+                error: "none"
+            };
+            period3 = {
+                start: "11:15",
+                end: "12:48"
+            };
+            lunch = {
+                start: "12:48",
+                end: "13:18"
+            }
+            period4 = {
+                start: "13:23",
+                end: "14:55"
+            };
 
 
         } else if (day.getDay() == 2) { //Tuesday
 
-            tutorial = { start: "7:50", end: "8:50" };
-            period1 = { start: "8:55", end: "10:06" };
-            period2 = { start: "10:13", end: "11:24" };
-            nutrition_break = { error: "none" };
-            lunch = { start: "11:24", end: "11:54" };
-            advisory = { error: "none" };
-            period3 = { start: "11:59", end: "13:10" };
-            period4 = { start: "13:17", end: "14:28" };
+            tutorial = {
+                start: "7:50",
+                end: "8:50"
+            };
+            period1 = {
+                start: "8:55",
+                end: "10:06"
+            };
+            period2 = {
+                start: "10:13",
+                end: "11:24"
+            };
+            nutrition_break = {
+                error: "none"
+            };
+            lunch = {
+                start: "11:24",
+                end: "11:54"
+            };
+            advisory = {
+                error: "none"
+            };
+            period3 = {
+                start: "11:59",
+                end: "13:10"
+            };
+            period4 = {
+                start: "13:17",
+                end: "14:28"
+            };
 
         } else if (day.getDay() == 3) { //Wednesday
 
-            tutorial = { start: "7:50", end: "8:50" };
-            period1 = { start: "8:55", end: "10:06" };
-            period2 = { start: "10:13", end: "11:24" };
-            advisory = { start: "11:31", end: "11:51" };
-            lunch = { start: "11:51", end: "12:21" };
-            nutrition_break = { error: "none" };
-            period3 = { start: "12:26", end: "1:37" };
-            period4 = { start: "13:44", end: "14:55" };
+            tutorial = {
+                start: "7:50",
+                end: "8:50"
+            };
+            period1 = {
+                start: "8:55",
+                end: "10:06"
+            };
+            period2 = {
+                start: "10:13",
+                end: "11:24"
+            };
+            advisory = {
+                start: "11:31",
+                end: "11:51"
+            };
+            lunch = {
+                start: "11:51",
+                end: "12:21"
+            };
+            nutrition_break = {
+                error: "none"
+            };
+            period3 = {
+                start: "12:26",
+                end: "1:37"
+            };
+            period4 = {
+                start: "13:44",
+                end: "14:55"
+            };
 
         } else { //Saturday, Sunday
 
-            tutorial = { error: "none" };
-            period1 = { error: "none" };
-            period2 = { error: "none" };
-            advisory = { error: "none" };
-            lunch = { error: "none" };
-            nutrition_break = { error: "none" };
-            period3 = { error: "none" };
-            period4 = { error: "none" };
+            tutorial = {
+                error: "none"
+            };
+            period1 = {
+                error: "none"
+            };
+            period2 = {
+                error: "none"
+            };
+            advisory = {
+                error: "none"
+            };
+            lunch = {
+                error: "none"
+            };
+            nutrition_break = {
+                error: "none"
+            };
+            period3 = {
+                error: "none"
+            };
+            period4 = {
+                error: "none"
+            };
 
         }
 
-        return { tutorial, period1, period2, advisory, lunch, nutrition_break, period3, period4 };
+        return {
+            tutorial,
+            period1,
+            period2,
+            advisory,
+            lunch,
+            nutrition_break,
+            period3,
+            period4
+        };
 
     }
 
     function getCurrentPeriod(schedule) {
 
-        var today = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+        var today = new Date().toLocaleString("en-US", {
+            timeZone: "America/Los_Angeles"
+        });
         today = new Date(today);
 
         var current_time = pad(today.getHours()) + ":" + pad(today.getMinutes());
@@ -573,7 +675,7 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
             q: query,
             singleEvents: true,
             orderBy: 'startTime'
-        }; 	//Optional query parameters referencing google APIs
+        }; //Optional query parameters referencing google APIs
 
         return new Promise((resolve, reject) => {
 
@@ -605,12 +707,16 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
                         var event_title = events[0]["summary"];
 
-                        var event_start = new Date(events[0]["start"].dateTime).toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+                        var event_start = new Date(events[0]["start"].dateTime).toLocaleString("en-US", {
+                            timeZone: "America/Los_Angeles"
+                        });
                         event_start = new Date(event_start);
                         var event_start_date = monthName[event_start.getMonth()] + " " + ordinal_suffix_of(event_start.getDate());
                         var event_start_time = dateFormat(event_start, "h:MM TT");
 
-                        var event_end = new Date(events[0]["end"].dateTime).toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+                        var event_end = new Date(events[0]["end"].dateTime).toLocaleString("en-US", {
+                            timeZone: "America/Los_Angeles"
+                        });
                         event_end = new Date(event_end);
 
                         var event_end_date = monthName[event_end.getMonth()] + " " + ordinal_suffix_of(event_end.getDate());
@@ -653,7 +759,9 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
     function what_period(agent) {
 
-        var date = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+        var date = new Date().toLocaleString("en-US", {
+            timeZone: "America/Los_Angeles"
+        });
         date = new Date(date);
 
         var todaysSchedule = getSchedule(date);
@@ -677,14 +785,18 @@ exports.dialogflowFirebaseFulfillment = functions.https.onRequest((request, resp
 
         if (day == null || day == "") {
 
-            var date = new Date().toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+            var date = new Date().toLocaleString("en-US", {
+                timeZone: "America/Los_Angeles"
+            });
             date = new Date(date);
 
             console.log("No date specified... Today is : " + date);
 
         } else {
 
-            var date = new Date(day).toLocaleString("en-US", { timeZone: "America/Los_Angeles" });
+            var date = new Date(day).toLocaleString("en-US", {
+                timeZone: "America/Los_Angeles"
+            });
             date = new Date(date);
 
             console.log("Date specified as: " + date);
