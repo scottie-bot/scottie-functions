@@ -2,7 +2,9 @@
   trigger_mode: "ON_EVERY_PUSH"
   ref_name: "master"
   ref_type: "BRANCH"
-  trigger_condition: "ALWAYS"
+  trigger_condition: "ON_CHANGE_AT_PATH"
+  trigger_condition_paths:
+    - "functions/"
   actions:
     - action: "Execute: firebase deploy --non-interactive"
       type: "FIREBASE"
